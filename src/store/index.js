@@ -9,6 +9,9 @@ export default createStore({
   mutations: {
     setTareas(state, payload) {
       state.tareas = payload;
+    },
+    setTarea(state, payload) {
+      state.tarea = payload;
     }
   },
   actions: {
@@ -29,6 +32,19 @@ export default createStore({
         });
         commit('setTareas', tareasTemp);
       });
+    },
+    editarTarea({commit}, tarea) {
+      console.log(tarea);
+    },
+    getTarea({commit}, idTarea) {
+      // vamos a obtener la tarea por id
+      db.collection('tareas').doc(idTarea).get().then(document => {
+        console.log(document.id);
+        const tareaObtenida = document.data(); // la tarea es documento que es un objeto
+        tareaObtenida.id = document.id;
+        console.log(tareaObtenida);
+        commit('setTarea', tareaObtenida)
+      })
     }
   },
   getters: {

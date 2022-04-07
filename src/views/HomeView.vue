@@ -5,9 +5,9 @@
     <div class="row">
       <div class="col-6 offset-3 mb-5">
         <div class="text-center">
-          <div>
+          <router-link to="/agregar">
             <button type="button" class="btn btn-sm btn-outline-success"> Agregar Tarea</button>
-          </div>
+          </router-link>
         </div>
       </div>
     </div>
@@ -19,9 +19,12 @@
             <!-- {{ tarea.nombre }} - {{ tarea.id }} -->
             {{ tarea.nombre }}
             <button class="float-end btn btn-danger btn-sm"><i class="fas fa-trash"></i></button>
-            <div class="float-end">
+            <router-link 
+              class="float-end"
+              :to="{ name: 'editar', params: {id: tarea.id}}"
+              >
               <button class="btn btn-success btn-sm mx-1"><i class="fas fa-pencil-alt"></i></button>
-            </div>
+            </router-link>
           </li>
         </ul>
       </div>
