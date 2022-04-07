@@ -1,5 +1,5 @@
 import firebase from 'firebase/app';
-import 'firebase/firestore';
+import 'firebase/firestore'; // gracias a esta importación podemos conectar con la base de datos
 
 const firebaseConfig = {
   apiKey: "AIzaSyDMH1ijqaUdGhFNRH_TGldFG9zEj942FUs",

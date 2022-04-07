@@ -1,6 +1,6 @@
 import { createStore } from 'vuex';
 import { db } from '../firebase';
-
+import router from '../router'
 export default createStore({
   state: {
     tareas: [],
@@ -32,6 +32,16 @@ export default createStore({
         });
         commit('setTareas', tareasTemp);
       });
+    },
+    agregarTarea({commit}, nombreTarea){
+      console.log(nombreTarea);
+      db.collection('tareas').add({
+        nombre: nombreTarea
+      })
+      .then( document => {
+        console.log(document.id);
+        router.push('/'); // hacemos una redirección al home
+      })
     },
     editarTarea({commit}, tarea) {
       console.log(tarea);
