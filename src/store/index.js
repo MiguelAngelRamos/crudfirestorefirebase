@@ -1,6 +1,7 @@
 import { createStore } from 'vuex';
 import { db } from '../firebase';
 import router from '../router'
+
 export default createStore({
   state: {
     tareas: [],
@@ -45,9 +46,17 @@ export default createStore({
     },
     editarTarea({commit}, tarea) {
       console.log(tarea);
+      db.collection('tareas').doc(tarea.id).update({
+        nombre: tarea.nombre
+      })
+      .then(() => {
+        console.log('Tarea edita con exito!!');
+        router.push('/');
+      })
     },
     getTarea({commit}, idTarea) {
       // vamos a obtener la tarea por id
+      console.log(idTarea);
       db.collection('tareas').doc(idTarea).get().then(document => {
         console.log(document.id);
         const tareaObtenida = document.data(); // la tarea es documento que es un objeto
