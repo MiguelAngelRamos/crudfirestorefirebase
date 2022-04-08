@@ -13,6 +13,9 @@ export default createStore({
     },
     setTarea(state, payload) {
       state.tarea = payload;
+    },
+    setEliminarTarea(state, payload) {
+      state.tareas = state.tareas.filter(tarea => tarea.id !== payload)
     }
   },
   actions: {
@@ -53,6 +56,15 @@ export default createStore({
         console.log('Tarea edita con exito!!');
         router.push('/');
       })
+    },
+    eliminarTarea({commit, dispatch}, idTarea) {
+      db.collection('tareas').doc(idTarea).delete()
+        .then( () => {
+          console.log('Tarea Eliminada con exito!!');
+          // Una acción puede llamar a otra accción
+          // dispatch('getTareas') // funciona perfecto
+          commit('setEliminarTarea', idTarea)
+        }).catch(err=> console.log(err));
     },
     getTarea({commit}, idTarea) {
       // vamos a obtener la tarea por id

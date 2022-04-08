@@ -18,7 +18,12 @@
           <li class="list-group-item" v-for="tarea in tareas" :key="tarea.id">
             <!-- {{ tarea.nombre }} - {{ tarea.id }} -->
             {{ tarea.nombre }}
-            <button class="float-end btn btn-danger btn-sm"><i class="fas fa-trash"></i></button>
+            <button
+              @click="eliminarTarea(tarea.id)"
+              class="float-end btn btn-danger btn-sm"
+            >
+            <i class="fas fa-trash"></i>
+            </button>
 
             <router-link class="float-end" :to="{ name: 'editar', params: {id: tarea.id}}">
               <button class="btn btn-success btn-sm mx-1"><i class="fas fa-pencil-alt"></i></button>
@@ -36,7 +41,7 @@ import { mapActions, mapState } from "vuex";
 export default {
   name: "Home",
   methods: {
-    ...mapActions(['getTareas'])
+    ...mapActions(['getTareas', 'eliminarTarea'])
   },
   computed: {
     ...mapState(['tareas'])
